@@ -26,9 +26,6 @@ Start the application with Docker Compose, then open the Swagger interface at `h
 
 Register two accounts before testing. One account acts as the attacker, the other as the victim. Obtain a JWT for each account by sending credentials to the `POST /token` endpoint.
 
-```bash
-curl -X POST http://localhost:8091/register -H "Content-Type: application/json" -d '{"username":"userA","password":"pass123","phone_number":"123456789","first_name":"User","last_name":"A"}'
-curl -X POST http://localhost:8091/token -H "Content-Type: application/x-www-form-urlencoded" -d "username=userA&password=pass123"
 The token endpoint uses form data, not JSON. The returned access_token is a JWT that must be sent as a Bearer token in subsequent requests.
 
 Level 0: Information Disclosure
@@ -128,4 +125,4 @@ Cause: Several endpoints check authentication but not the caller's role. A Custo
 
 Process: Use a Customer token against endpoints such as PUT /menu, DELETE /menu/{id}, or GET /admin/stats/disk. Compare the response with a Chef token to confirm the missing role check.
 
-Payload: PUT /menu or DELETE /menu/17 with a Customer Bearer token. A successful response confirms that function level authorization is not enforced.
+Payload: PUT /menu or DELETE /menu/17 with a Customer Bearer token. A successful response confirms that function level authorization is not enforced
